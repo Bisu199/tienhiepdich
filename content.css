@@ -1,0 +1,17 @@
+.translated-text {
+  background-image: linear-gradient(180deg, transparent 0%, transparent calc(100% - 3px), rgba(99, 102, 241, 0.22) calc(100% - 3px)) !important;
+  border-radius: 2px !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .translated-text {
+    background-image: linear-gradient(180deg, transparent 0%, transparent calc(100% - 3px), rgba(129, 140, 248, 0.38) calc(100% - 3px)) !important;
+  }
+}
+
+
+/* Fix font tiếng Việt — override font tiếng Trung của trang */
+[data-translation-status="translated"],
+[data-translation-status="translated"] * {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+}

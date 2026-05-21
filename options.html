@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="color-scheme" content="dark">
+  <title>Tiên Hiệp Dịch Thuật – Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <h1 id="header">⚡ Tiên Hiệp Dịch Thuật</h1>
+    <p class="app-subtitle">Settings for xianxia novel translation</p>
+
+    <!-- LANGUAGE: chỉ 2 option -->
+    <section class="settings-section">
+      <div class="section-header">
+        <div class="section-header-text">
+          <h2>Language</h2>
+          <span class="section-desc">Target language for translation</span>
+        </div>
+        <button class="btn-reset" type="button" data-reset="language">Reset</button>
+      </div>
+      <div class="settings-card">
+        <div class="form-group">
+          <label for="targetLanguage">Target language</label>
+          <select id="targetLanguage">
+            <option value="vi">Tiếng Việt — Vietnamese</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- API: ẩn model, chỉ provider + key -->
+    <section class="settings-section">
+      <div class="section-header">
+        <div class="section-header-text">
+          <h2>API</h2>
+          <span class="section-desc">AI provider connection settings</span>
+        </div>
+        <button class="btn-reset" type="button" data-reset="api">Reset</button>
+      </div>
+      <div class="settings-card">
+        <div class="form-group">
+          <label for="apiProvider">Provider</label>
+          <select id="apiProvider">
+            <option value="gemini">Google (Gemini)</option>
+            <option value="openai">OpenAI (ChatGPT)</option>
+            <option value="anthropic">Anthropic (Claude)</option>
+            <option value="openai-compatible">OpenAI Compatible</option>
+          </select>
+        </div>
+        <div class="form-group" id="endpointGroup" style="display:none">
+          <label for="endpointUrl">Endpoint URL</label>
+          <input type="text" id="endpointUrl" placeholder="https://api.example.com/v1/chat/completions" autocomplete="off" spellcheck="false">
+        </div>
+        <div class="form-group">
+          <label for="apiKey">API Key</label>
+          <input type="password" id="apiKey" placeholder="" autocomplete="off" spellcheck="false">
+        </div>
+        <!-- AI Model: hidden, JS vẫn đọc được qua id -->
+        <div class="form-group" style="display:none">
+          <input type="text" id="aiModel" autocomplete="off" spellcheck="false">
+        </div>
+      </div>
+    </section>
+
+    <!-- OUTPUT: hidden -->
+    <div style="display:none">
+      <input type="number" id="maxToken" value="64000">
+    </div>
+
+    <!-- NETWORK: hidden với defaults đã set -->
+    <div style="display:none">
+      <input type="number" id="delayBetweenRequests" value="200">
+      <input type="number" id="concurrencyLimit" value="10">
+      <input type="number" id="maxRetries" value="3">
+      <input type="number" id="timeout" value="180">
+    </div>
+
+    <!-- DISPLAY & BEHAVIOR: chỉ 2 toggle -->
+    <section class="settings-section">
+      <div class="section-header">
+        <div class="section-header-text">
+          <h2>Display &amp; Behavior</h2>
+        </div>
+        <button class="btn-reset" type="button" data-reset="display">Reset</button>
+      </div>
+      <div class="settings-card">
+        <label class="toggle-group" for="realTimeTranslation">
+          <span>Auto translate</span>
+          <input type="checkbox" id="realTimeTranslation">
+          <span class="toggle-switch" aria-hidden="true"></span>
+        </label>
+        <label class="toggle-group" for="autoRetranslateDomain">
+          <span>Auto re-translate within domain</span>
+          <input type="checkbox" id="autoRetranslateDomain">
+          <span class="toggle-switch" aria-hidden="true"></span>
+        </label>
+        <!-- Hidden toggles với defaults -->
+        <div style="display:none">
+          <input type="checkbox" id="toggleBlueBackground">
+          <input type="checkbox" id="showProgressPopup" checked>
+          <input type="checkbox" id="hidePromptAllSites">
+          <input type="checkbox" id="showContextMenu" checked>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXCLUDED SITES -->
+    <section class="settings-section">
+      <div class="section-header">
+        <div class="section-header-text">
+          <h2>Excluded Sites</h2>
+          <span class="section-desc">URLs to skip auto-translation (one per line)</span>
+        </div>
+        <button class="btn-reset" type="button" data-reset="exclude">Reset</button>
+      </div>
+      <div class="settings-card">
+        <div class="form-group">
+          <label for="excludeList">Sites to exclude</label>
+          <textarea id="excludeList" rows="4" placeholder="https://example.com&#10;https://www.example.org" spellcheck="false"></textarea>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="save-bar">
+    <button id="saveBtn" type="button">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+        <polyline points="7 3 7 8 15 8"></polyline>
+      </svg>
+      <span>Save settings</span>
+    </button>
+    <div id="status" role="status" aria-live="polite"></div>
+  </div>
+
+  <script src="translations.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
